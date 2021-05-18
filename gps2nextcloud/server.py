@@ -64,7 +64,11 @@ def server_func(config_path, section_name):
             events = sel.select(timeout=None)
             for key, mask in events:
                 if key.data is None:
-                    accept_wrapper(key.fileobj, gate_class, protocol_class, cfg, section_name)
+                    try:
+                        accept_wrapper(key.fileobj, gate_class, protocol_class, cfg, section_name)
+                     except Exception:
+                        logger.info("Accepting Connection Failed, probably portscan")
+                        protocol.close()
                 else:
                     protocol = key.data
                     # noinspection PyBroadException
