@@ -68,7 +68,7 @@ def server_func(config_path, section_name):
                         accept_wrapper(key.fileobj, gate_class, protocol_class, cfg, section_name)
                      except Exception:
                         logger.info("Accepting Connection Failed, probably portscan")
-                        protocol.close()
+                        #protocol.close()
                 else:
                     protocol = key.data
                     # noinspection PyBroadException
